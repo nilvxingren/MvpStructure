@@ -17,16 +17,14 @@ import app.season.mvpstructure.ui.base.BaseSubscriber;
  */
 public class LoginPresenter extends BasePresenter<ILoginMvpView> {
 
-    private final DataManager mDataManager;
-
     @Inject
     public LoginPresenter(DataManager mDataManager) {
-        this.mDataManager = mDataManager;
+        super(mDataManager);
     }
 
     public void login(LoginRequest loginRequest) {
         getMvpView().showProgressDialog("登录中", false);
-        doNormalSubscribe(mDataManager.login(loginRequest), new LoginSubscriber());
+        doNormalSubscribe(dataManager.login(loginRequest), new LoginSubscriber());
     }
 
     private class LoginSubscriber extends BaseSubscriber<LoginResponse> {

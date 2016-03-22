@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 import app.season.mvpstructure.BaseApplication;
 import app.season.mvpstructure.data.DataManager;
 import app.season.mvpstructure.data.remote.GitHubService;
+import app.season.mvpstructure.data.remote.KtLoginService;
 import app.season.mvpstructure.data.remote.UnauthorisedInterceptor;
 import app.season.mvpstructure.injection.ApplicationContext;
 import app.season.mvpstructure.injection.module.ApplicationModule;
@@ -33,4 +34,6 @@ public interface ApplicationComponent {
     Context context();
 
     GitHubService githubService();
+
+    KtLoginService ktLoginService();
 }

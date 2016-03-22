@@ -8,6 +8,7 @@ import com.squareup.otto.Bus;
 import javax.inject.Singleton;
 
 import app.season.mvpstructure.data.remote.GitHubService;
+import app.season.mvpstructure.data.remote.KtLoginService;
 import app.season.mvpstructure.injection.ApplicationContext;
 import dagger.Module;
 import dagger.Provides;
@@ -45,5 +46,11 @@ public class ApplicationModule {
     @Singleton
     GitHubService provideGitHubService() {
         return GitHubService.Factory.createService(mApplication);
+    }
+
+    @Provides
+    @Singleton
+    KtLoginService provideKtLoginService() {
+        return KtLoginService.Factory.createService(mApplication);
     }
 }

@@ -1,5 +1,8 @@
 package app.season.mvpstructure.ui.base;
 
+import javax.inject.Inject;
+
+import app.season.mvpstructure.data.DataManager;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -15,6 +18,13 @@ import rx.schedulers.Schedulers;
  */
 public class BasePresenter<V extends IMvpView> implements IPresenter<V> {
     private V mMvpView;
+
+    public final DataManager dataManager;
+
+    @Inject
+    public BasePresenter(DataManager dataManager) {
+        this.dataManager = dataManager;
+    }
 
     @Override
     public void attachView(V mvpView) {

@@ -75,11 +75,13 @@ dependencies {
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     compile "com.jakewharton.timber:timber:$TIMBER_VERSION"
 
-
     //dagger2
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+
+    //MaterialSearchView
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
 
     // Instrumentation test dependencies
     androidTestCompile "junit:junit:$JUNIT_VERSION"

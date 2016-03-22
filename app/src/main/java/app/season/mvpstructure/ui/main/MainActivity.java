@@ -10,12 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import app.season.mvpstructure.R;
+import app.season.mvpstructure.data.bean.Repo;
 import app.season.mvpstructure.ui.base.BaseActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,12 +38,15 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     RecyclerView recycler;
     @Bind(R.id.fab)
     FloatingActionButton fab;
+    @Bind(R.id.search_view)
+    MaterialSearchView searchView;
 
     @Inject
     MainPresenter mainPresenter;
 
+    @Inject
+    MainAdapter mainAdapter;
 
-    private MainAdapter mainAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +58,43 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
         getActivityComponent().inject(this);
         mainPresenter.attachView(this);
 
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add("item" + i);
-        }
-        mainAdapter = new MainAdapter(list);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(linearLayoutManager);
-
 //        recycler.addItemDecoration();
         recycler.setAdapter(mainAdapter);
+
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //Do some magic
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Do some magic
+                return false;
+            }
+        });
+
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                //Do some magic
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                //Do some magic
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mainPresenter.listRepos("ssseasonnn");
     }
 
     @Override
@@ -77,6 +107,8 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        searchView.setMenuItem(item);
         return true;
     }
 
@@ -105,5 +137,10 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     /**
      * implement IMainMvpView method
      */
+    @Override
+    public void onListRepos(List<Repo> list) {
+        mainAdapter.addData(list);
+    }
+
 
 }

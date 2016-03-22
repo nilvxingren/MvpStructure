@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import app.season.mvpstructure.R;
+import app.season.mvpstructure.data.bean.Repo;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -20,10 +22,17 @@ import butterknife.ButterKnife;
  */
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    private List<String> data;
 
-    public MainAdapter(List<String> data) {
-        this.data = data;
+    private List<Repo> mData;
+
+    @Inject
+    public MainAdapter() {
+        mData = new ArrayList<>();
+    }
+
+    public void addData(List<Repo> data) {
+        this.mData.addAll(data);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -35,26 +44,37 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.text.setText(data.get(position));
+//        holder.repoIcon.setImageURI(Uri.parse(mData.get(position).get));
+        holder.repoName.setText(mData.get(position).getName());
+        holder.repoDescribe.setText(mData.get(position).getDescription());
+        holder.repoLanguage.setText(mData.get(position).getLanguage());
+        holder.repoStar.setText(mData.get(position).getStargazers_count() + "");
+        holder.repoFork.setText(mData.get(position).getForks_count() + "");
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mData.size();
     }
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.image)
-        ImageView image;
-        @Bind(R.id.text)
-        TextView text;
+        @Bind(R.id.repo_icon)
+        ImageView repoIcon;
+        @Bind(R.id.repo_name)
+        TextView repoName;
+        @Bind(R.id.repo_describe)
+        TextView repoDescribe;
+        @Bind(R.id.repo_language)
+        TextView repoLanguage;
+        @Bind(R.id.repo_star)
+        TextView repoStar;
+        @Bind(R.id.repo_fork)
+        TextView repoFork;
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        ViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
-
     }
-
 }
