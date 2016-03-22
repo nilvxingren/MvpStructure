@@ -1,7 +1,9 @@
 package app.season.mvpstructure.injection.module;
 
 import android.app.Activity;
+import android.content.Context;
 
+import app.season.mvpstructure.injection.ActivityContext;
 import app.season.mvpstructure.injection.PerActivity;
 import dagger.Module;
 import dagger.Provides;
@@ -18,6 +20,12 @@ public class ActivityModule {
     @Provides
     @PerActivity
     Activity provideActivity() {
+        return mActivity;
+    }
+
+    @Provides
+    @ActivityContext
+    Context provideContext() {
         return mActivity;
     }
 }

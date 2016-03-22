@@ -3,11 +3,14 @@ package app.season.mvpstructure;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
 import javax.inject.Inject;
 
+import app.season.mvpstructure.data.BusEvent;
 import app.season.mvpstructure.injection.component.ApplicationComponent;
 import app.season.mvpstructure.injection.component.DaggerApplicationComponent;
 import app.season.mvpstructure.injection.module.ApplicationModule;
@@ -49,6 +52,11 @@ public class BaseApplication extends Application {
 
     public ApplicationComponent getApplicationComponent() {
         return mApplicationComponent;
+    }
+
+    @Subscribe
+    public void onRequestFailed(BusEvent.RequestFailedEvent event) {
+        Toast.makeText(this, "网络连接失败，请检查网络设置", Toast.LENGTH_SHORT).show();
     }
 
     /**

@@ -1,8 +1,11 @@
 package app.season.mvpstructure.ui.base;
 
+import android.content.Context;
+
 import javax.inject.Inject;
 
 import app.season.mvpstructure.data.DataManager;
+import app.season.mvpstructure.injection.ActivityContext;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -19,10 +22,12 @@ import rx.schedulers.Schedulers;
 public class BasePresenter<V extends IMvpView> implements IPresenter<V> {
     private V mMvpView;
 
+    public final Context context;
     public final DataManager dataManager;
 
     @Inject
-    public BasePresenter(DataManager dataManager) {
+    public BasePresenter(@ActivityContext Context context, DataManager dataManager) {
+        this.context = context;
         this.dataManager = dataManager;
     }
 

@@ -1,11 +1,14 @@
 package app.season.mvpstructure.ui.main;
 
+import android.content.Context;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import app.season.mvpstructure.data.DataManager;
 import app.season.mvpstructure.data.bean.Repo;
+import app.season.mvpstructure.injection.ActivityContext;
 import app.season.mvpstructure.ui.base.BasePresenter;
 import app.season.mvpstructure.ui.base.BaseSubscriber;
 
@@ -16,17 +19,22 @@ import app.season.mvpstructure.ui.base.BaseSubscriber;
  */
 public class MainPresenter extends BasePresenter<IMainMvpView> {
 
+
     @Inject
-    public MainPresenter(DataManager dataManager) {
-        super(dataManager);
+    public MainPresenter(@ActivityContext Context context, DataManager dataManager) {
+        super(context, dataManager);
     }
 
     public void listRepos(String userName) {
         getMvpView().showProgressDialog("init...", false);
-        doNormalSubscribe(dataManager.listRepos(userName), new GetReposSubscriber());
+        doNormalSubscribe(dataManager.listRepos(userName), new GetReposSubscriber(context));
     }
 
     private class GetReposSubscriber extends BaseSubscriber<List<Repo>> {
+        public GetReposSubscriber(Context context) {
+            super(context);
+        }
+
         @Override
         public void onCompleted() {
             super.onCompleted();
