@@ -12,4 +12,8 @@ import app.season.mvpstructure.ui.base.IMvpView;
  */
 public interface IMainMvpView extends IMvpView {
     void onListRepos(List<Repo> list);
+
+    void onNetworkError();
+
+    void showLoading();
 }

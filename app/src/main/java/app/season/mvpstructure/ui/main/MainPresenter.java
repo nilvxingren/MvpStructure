@@ -26,7 +26,7 @@ public class MainPresenter extends BasePresenter<IMainMvpView> {
     }
 
     public void listRepos(String userName) {
-        getMvpView().showProgressDialog("init...", false);
+        getMvpView().showLoading();
         doNormalSubscribe(dataManager.listRepos(userName), new GetReposSubscriber(context));
     }
 
@@ -38,7 +38,6 @@ public class MainPresenter extends BasePresenter<IMainMvpView> {
         @Override
         public void onCompleted() {
             super.onCompleted();
-            getMvpView().hideProgressDialog();
         }
 
         @Override
@@ -50,7 +49,7 @@ public class MainPresenter extends BasePresenter<IMainMvpView> {
         @Override
         public void onError(Throwable e) {
             super.onError(e);
-            getMvpView().hideProgressDialog();
+            getMvpView().onNetworkError();
         }
     }
 }

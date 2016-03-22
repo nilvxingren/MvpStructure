@@ -3,12 +3,14 @@ package app.season.mvpstructure.ui.main;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -40,6 +42,10 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     FloatingActionButton fab;
     @Bind(R.id.search_view)
     MaterialSearchView searchView;
+    @Bind(R.id.network_error)
+    TextView networkError;
+    @Bind(R.id.progressbar)
+    ContentLoadingProgressBar progressBar;
 
     @Inject
     MainPresenter mainPresenter;
@@ -47,6 +53,10 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     @Inject
     MainAdapter mainAdapter;
 
+    @OnClick(R.id.network_error)
+    public void onClick() {
+        mainPresenter.listRepos("ssseasonnn");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,7 +149,24 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
      */
     @Override
     public void onListRepos(List<Repo> list) {
+        recycler.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
+        networkError.setVisibility(View.GONE);
         mainAdapter.addData(list);
+    }
+
+    @Override
+    public void onNetworkError() {
+        networkError.setVisibility(View.VISIBLE);
+        recycler.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+        networkError.setVisibility(View.GONE);
+        recycler.setVisibility(View.GONE);
     }
 
 
