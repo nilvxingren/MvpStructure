@@ -22,6 +22,7 @@ import timber.log.Timber;
 public class BaseApplication extends Application {
     @Inject
     Bus bus;
+
     ApplicationComponent mApplicationComponent;
 
     @Override
@@ -32,6 +33,7 @@ public class BaseApplication extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .build();
         mApplicationComponent.inject(this);
+
         bus.register(this);
 
         if (BuildConfig.DEBUG) {

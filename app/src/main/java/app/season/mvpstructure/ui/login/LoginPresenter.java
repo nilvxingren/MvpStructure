@@ -30,6 +30,7 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
     }
 
     private class LoginSubscriber extends BaseSubscriber<LoginResponse> {
+
         @Override
         public void onNext(LoginResponse loginResponse) {
             super.onNext(loginResponse);

@@ -1,5 +1,7 @@
 package app.season.mvpstructure.injection.component;
 
+import android.app.Activity;
+
 import app.season.mvpstructure.injection.PerActivity;
 import app.season.mvpstructure.injection.module.ActivityModule;
 import app.season.mvpstructure.ui.login.LoginActivity;
@@ -16,4 +18,6 @@ public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(MainActivity mainActivity);
+
+    Activity activity();
 }
