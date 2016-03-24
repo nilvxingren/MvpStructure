@@ -1,7 +1,11 @@
 package app.season.mvpstructure.data.bean;
 
 /**
- * Created by Season on 2016/3/24.
+ * the entity of Note
+ *
+ * @author Season
+ * @version 0.1
+ *          Created by Season on 2016/3/24.
  */
 public class Note {
     public int id;

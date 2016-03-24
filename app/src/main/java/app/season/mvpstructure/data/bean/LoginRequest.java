@@ -3,7 +3,11 @@ package app.season.mvpstructure.data.bean;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Season on 2016/1/22.
+ * LoginRequest
+ *
+ * @author Season
+ * @version 0.1
+ *          Created by Season on 2016/1/22.
  */
 public class LoginRequest {
     @SerializedName("Phone")

@@ -17,7 +17,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Season on 2016/3/24.
+ * NoteActivity's adapter
+ *
+ * @author Season
+ * @version 0.1
+ *          Created by Season on 2016/3/24.
  */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     private OnItemClickListener onItemClickListener;

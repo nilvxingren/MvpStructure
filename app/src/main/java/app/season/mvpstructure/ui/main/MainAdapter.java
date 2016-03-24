@@ -18,7 +18,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Season on 2016/3/22.
+ * MainActivity's Adapter
+ *
+ * @author Season
+ * @version 0.1
+ *          Created by Season on 2016/3/22.
  */
 public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
