@@ -40,6 +40,7 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
         public void onNext(LoginResponse loginResponse) {
             super.onNext(loginResponse);
             if (loginResponse.getFlag() == 0) {
+                getMvpView().hideProgressDialog();
                 getMvpView().loginSuccess();
             } else {
                 getMvpView().loginFail();
@@ -49,7 +50,7 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
         @Override
         public void onCompleted() {
             super.onCompleted();
-            getMvpView().hideProgressDialog();
+
         }
 
         @Override

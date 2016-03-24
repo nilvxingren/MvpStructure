@@ -6,50 +6,51 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Season on 2016/3/22.
  */
-public class LoginResponse extends BaseResponse {
-    @SerializedName("OnlineState")
+public class LoginResponse {
+    @SerializedName("Flag")
     @Expose
-    private String OnlineState;
-    @SerializedName("UserInfo")
+    private int Flag;
+    @SerializedName("Hint")
     @Expose
-    private UserInfo UserInfo;
-    @SerializedName("UserData")
+    private String Hint;
+    @SerializedName("Id")
     @Expose
-    private UserData UserData;
+    private int id;
+
 
     /**
-     * @return The OnlineState
+     * @return The Flag
      */
-    public String getOnlineState() {
-        return OnlineState;
-    }
-
-    /**
-     * @param OnlineState The OnlineState
-     */
-    public void setOnlineState(String OnlineState) {
-        this.OnlineState = OnlineState;
+    public int getFlag() {
+        return Flag;
     }
 
     /**
-     * @return The UserInfo
+     * @param Flag The Flag
      */
-    public UserInfo getUserInfo() {
-        return UserInfo;
+    public void setFlag(int Flag) {
+        this.Flag = Flag;
     }
 
     /**
-     * @param UserInfo The UserInfo
+     * @return The Hint
      */
-    public void setUserInfo(UserInfo UserInfo) {
-        this.UserInfo = UserInfo;
+    public String getHint() {
+        return Hint;
     }
 
-    public UserData getUserData() {
-        return UserData;
+    /**
+     * @param Hint The Hint
+     */
+    public void setHint(String Hint) {
+        this.Hint = Hint;
     }
 
-    public void setUserData(UserData userData) {
-        UserData = userData;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -8,6 +8,7 @@ import app.season.mvpstructure.injection.PerActivity;
 import app.season.mvpstructure.injection.module.ActivityModule;
 import app.season.mvpstructure.ui.login.LoginActivity;
 import app.season.mvpstructure.ui.main.MainActivity;
+import app.season.mvpstructure.ui.note.NoteActivity;
 import dagger.Component;
 
 /**
@@ -21,8 +22,11 @@ public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
 
+    void inject(NoteActivity noteActivity);
+
     Activity activity();
 
     @ActivityContext
     Context context();
+
 }

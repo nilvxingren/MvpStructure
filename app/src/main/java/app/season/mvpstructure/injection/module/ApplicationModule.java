@@ -18,6 +18,7 @@ import dagger.Provides;
  */
 @Module
 public class ApplicationModule {
+    private static final String DB_NAME = "database";
     protected final Application mApplication;
 
     public ApplicationModule(Application application) {
@@ -53,4 +54,5 @@ public class ApplicationModule {
     KtLoginService provideKtLoginService() {
         return KtLoginService.Factory.createService(mApplication);
     }
+
 }

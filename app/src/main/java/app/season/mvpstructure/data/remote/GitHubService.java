@@ -17,8 +17,7 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
- * API service
- * All Api declare in here
+ * GitHub API service
  *
  * @author Season
  * @version 0.1
@@ -50,6 +49,14 @@ public interface GitHubService {
             builder.addInterceptor(new UnauthorisedInterceptor(context));
 
             OkHttpClient client = builder.build();
+
+            /**
+             * if datetime should format,use this
+             *  GsonConverterFactory.create(gson)
+             */
+//            Gson gson = new GsonBuilder()
+//                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+//                    .create();
 
             Retrofit retrofit =
                     new Retrofit.Builder().baseUrl(GitHubService.ENDPOINT)

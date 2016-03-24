@@ -36,4 +36,5 @@ public interface ApplicationComponent {
     GitHubService githubService();
 
     KtLoginService ktLoginService();
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    package="app.season.mvpstructure"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="app.season.mvpstructure"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
     <!-- 用于访问网络，网络定位需要上网 -->
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -26,6 +26,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.note.NoteActivity"
+            android:label="@string/title_activity_note"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

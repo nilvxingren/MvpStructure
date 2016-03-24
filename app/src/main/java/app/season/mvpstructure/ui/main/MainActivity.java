@@ -1,5 +1,7 @@
 package app.season.mvpstructure.ui.main;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,9 +9,11 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -21,6 +25,7 @@ import javax.inject.Inject;
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.data.bean.Repo;
 import app.season.mvpstructure.ui.base.BaseActivity;
+import app.season.mvpstructure.ui.note.NoteActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -61,6 +66,12 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            getWindow().setEnterTransition(new Explode());
+            getWindow().setExitTransition(new Explode());
+        }
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -141,7 +152,9 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     public void onClick(View view) {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, NoteActivity.class);
+        startActivity(intent);
     }
 
     /**
