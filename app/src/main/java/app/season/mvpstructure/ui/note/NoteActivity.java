@@ -20,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NoteActivity extends BaseActivity implements INoteMvpView {
+public class NoteActivity extends BaseActivity implements INoteMvpView, NoteAdapter.OnItemClickListener {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -47,6 +47,8 @@ public class NoteActivity extends BaseActivity implements INoteMvpView {
 
         getActivityComponent().inject(this);
         notePresenter.attachView(this);
+
+        noteAdapter.setOnItemClickListener(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -76,7 +78,22 @@ public class NoteActivity extends BaseActivity implements INoteMvpView {
     }
 
     @Override
+    public void addNote(Note note) {
+        noteAdapter.addNote(note);
+    }
+
+    @Override
+    public void deleteNote(int position) {
+        noteAdapter.deleteNote(position);
+    }
+
+    @Override
     public void addData(List<Note> notes) {
         noteAdapter.addData(notes);
+    }
+
+    @Override
+    public void onItemClick(int rowId, int position) {
+        notePresenter.delete(rowId, position);
     }
 }

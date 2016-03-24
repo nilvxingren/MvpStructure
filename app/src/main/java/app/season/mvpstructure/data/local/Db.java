@@ -16,7 +16,7 @@ public class Db {
     public Db() {
     }
 
-    public static final class CreateTable {
+    public static final class NoteTable {
         public static final String TABLE_NAME = "notes";
 
         public static final String COLUMN_ID = "id";

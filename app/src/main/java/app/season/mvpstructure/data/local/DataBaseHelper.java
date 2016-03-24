@@ -1,5 +1,7 @@
 package app.season.mvpstructure.data.local;
 
+import android.database.Cursor;
+
 import com.squareup.sqlbrite.BriteDatabase;
 import com.squareup.sqlbrite.SqlBrite;
 
@@ -8,6 +10,7 @@ import javax.inject.Singleton;
 
 import app.season.mvpstructure.data.bean.Note;
 import rx.Observable;
+import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 /**
@@ -26,13 +29,30 @@ public class DataBaseHelper {
         this.db = SqlBrite.create().wrapDatabaseHelper(dbOpenHelper, Schedulers.io());
     }
 
-    public Observable<SqlBrite.Query> notes() {
-        Observable<SqlBrite.Query> notes = db.createQuery("notes", "select * from notes");
-        return notes;
+    public Observable<Note> queryAllNotes() {
+        Observable<Note> observable = Observable.create(new Observable.OnSubscribe<Note>() {
+            @Override
+            public void call(Subscriber<? super Note> subscriber) {
+                Cursor cursor = db.query("select * from " + Db.NoteTable.TABLE_NAME);
+                while (cursor.moveToNext()) {
+                    subscriber.onNext(Db.NoteTable.parseCursor(cursor));
+                }
+                cursor.close();
+                subscriber.onCompleted();
+            }
+        });
+        return observable;
+//        Observable<SqlBrite.Query> notes = db.createQuery(Db.NoteTable.TABLE_NAME,
+//                "select * from " + Db.NoteTable.TABLE_NAME);
+//        return notes;
     }
 
-    public void insert(Note note) {
-        db.insert("notes", Db.CreateTable.createNote(note));
+    public long insertNote(Note note) {
+        return db.insert(Db.NoteTable.TABLE_NAME, Db.NoteTable.createNote(note));
+    }
+
+    public int deleteNote(int rowId) {
+        return db.delete(Db.NoteTable.TABLE_NAME, "id = ?", "" + rowId);
     }
 
 }

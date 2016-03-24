@@ -10,5 +10,9 @@ import app.season.mvpstructure.ui.base.IMvpView;
  */
 public interface INoteMvpView extends IMvpView {
 
+    void addNote(Note note);
+
+    void deleteNote(int position);
+
     void addData(List<Note> notes);
 }

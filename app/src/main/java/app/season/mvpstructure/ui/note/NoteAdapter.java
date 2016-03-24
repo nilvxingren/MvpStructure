@@ -20,12 +20,29 @@ import butterknife.ButterKnife;
  * Created by Season on 2016/3/24.
  */
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
-
+    private OnItemClickListener onItemClickListener;
     private List<Note> list;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
 
     @Inject
     public NoteAdapter() {
         list = new ArrayList<>();
+    }
+
+    public void deleteNote(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+        //this line below gives you the animation and also updates the
+        //list items after the deleted item
+        notifyItemRangeChanged(position, getItemCount());
+    }
+
+    public void addNote(Note note) {
+        list.add(note);
+        notifyItemInserted(list.size() - 1);
     }
 
     public void addData(List<Note> data) {
@@ -42,9 +59,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.itemView.setTag(R.id.row_id, list.get(position).id);
         holder.text.setText(list.get(position).text);
         holder.date.setText(list.get(position).date);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onItemClick(list.get(position).id, position);
+            }
+        });
     }
 
     @Override
@@ -62,5 +87,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int rowId, int position);
     }
 }

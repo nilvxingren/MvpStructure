@@ -28,7 +28,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.beginTransaction();
         try {
-            db.execSQL(Db.CreateTable.CREATE);
+            db.execSQL(Db.NoteTable.CREATE);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

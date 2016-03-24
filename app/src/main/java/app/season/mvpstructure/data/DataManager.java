@@ -1,7 +1,6 @@
 package app.season.mvpstructure.data;
 
 import com.google.gson.Gson;
-import com.squareup.sqlbrite.SqlBrite;
 
 import java.util.List;
 
@@ -51,12 +50,16 @@ public class DataManager {
         return mGitHubService.listRepos(userName);
     }
 
-    public Observable<SqlBrite.Query> notes() {
-        return dataBaseHelper.notes();
+    public Observable<Note> queryAllNotes() {
+        return dataBaseHelper.queryAllNotes();
     }
 
-    public void insert(Note note) {
-        dataBaseHelper.insert(note);
+    public long insertNote(Note note) {
+        return dataBaseHelper.insertNote(note);
+    }
+
+    public int deleteNote(int rowId) {
+        return dataBaseHelper.deleteNote(rowId);
     }
 
 }
