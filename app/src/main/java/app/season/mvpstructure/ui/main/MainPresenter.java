@@ -11,6 +11,7 @@ import app.season.mvpstructure.data.bean.Repo;
 import app.season.mvpstructure.injection.ActivityContext;
 import app.season.mvpstructure.ui.base.BasePresenter;
 import app.season.mvpstructure.ui.base.BaseSubscriber;
+import rx.Subscription;
 
 /**
  * @author Season
@@ -19,6 +20,7 @@ import app.season.mvpstructure.ui.base.BaseSubscriber;
  */
 public class MainPresenter extends BasePresenter<IMainMvpView> {
 
+    private Subscription subscription;
 
     @Inject
     public MainPresenter(@ActivityContext Context context, DataManager dataManager) {
@@ -27,7 +29,7 @@ public class MainPresenter extends BasePresenter<IMainMvpView> {
 
     public void listRepos(String userName) {
         getMvpView().showLoading();
-        doNormalSubscribe(dataManager.listRepos(userName), new GetReposSubscriber(context));
+        subscription = doNormalSubscribe(dataManager.listRepos(userName), new GetReposSubscriber(context));
     }
 
     private class GetReposSubscriber extends BaseSubscriber<List<Repo>> {
@@ -51,5 +53,13 @@ public class MainPresenter extends BasePresenter<IMainMvpView> {
             super.onError(e);
             getMvpView().onNetworkError();
         }
+    }
+
+    @Override
+    public void detachView() {
+        if (subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+        super.detachView();
     }
 }
