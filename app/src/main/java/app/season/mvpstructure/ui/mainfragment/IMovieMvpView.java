@@ -1,8 +1,7 @@
-package app.season.mvpstructure.ui.main;
+package app.season.mvpstructure.ui.mainfragment;
 
-import java.util.List;
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
-import app.season.mvpstructure.data.bean.InTheatersResponse;
 import app.season.mvpstructure.ui.base.IMvpView;
 
 /**
@@ -12,5 +11,5 @@ import app.season.mvpstructure.ui.base.IMvpView;
  * FIXME
  */
 public interface IMovieMvpView extends IMvpView {
-    void onGetMovie(List<InTheatersResponse.SubjectsEntity> list);
+    RecyclerArrayAdapter getAdapter();
 }

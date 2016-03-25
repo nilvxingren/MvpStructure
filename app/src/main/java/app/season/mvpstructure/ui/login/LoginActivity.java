@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.data.bean.LoginRequest;
 import app.season.mvpstructure.ui.base.BaseActivity;
-import app.season.mvpstructure.ui.main.RepoActivity;
+import app.season.mvpstructure.ui.repo.RepoActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

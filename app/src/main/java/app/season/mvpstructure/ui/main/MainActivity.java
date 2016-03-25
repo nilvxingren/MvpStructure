@@ -20,6 +20,9 @@ import java.util.List;
 
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.ui.base.BaseActivity;
+import app.season.mvpstructure.ui.main.mainfragment.ComingSoonFragment;
+import app.season.mvpstructure.ui.main.mainfragment.InTheatersFragment;
+import app.season.mvpstructure.ui.main.mainfragment.TopFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -45,11 +48,11 @@ public class MainActivity extends BaseActivity
     @Bind(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
-    /**
-     * 填充到viewpager中的fragment
-     */
+    private final String[] mTitles = new String[]{
+            "正在热映", "即将上映", "TOP榜"
+    };
     private List<Fragment> mFragments;
-    private MainViewPagerAdapter mMainViewPagerAdapter;
+    private CustomViewPagerAdapter mCustomViewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +84,8 @@ public class MainActivity extends BaseActivity
         mFragments.add(comingSoonFragment);
         mFragments.add(topFragment);
 
-        mMainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager(), mFragments);
-        viewpager.setAdapter(mMainViewPagerAdapter);
+        mCustomViewPagerAdapter = new CustomViewPagerAdapter(getSupportFragmentManager(), mFragments, mTitles);
+        viewpager.setAdapter(mCustomViewPagerAdapter);
         // 设置ViewPager最大缓存的页面个数
         viewpager.setOffscreenPageLimit(5);
         // 给ViewPager添加页面动态监听器（为了让Toolbar中的Title可以变化相应的Tab的标题）

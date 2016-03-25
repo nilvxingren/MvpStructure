@@ -12,15 +12,14 @@ import java.util.List;
  * Time: 13:12
  * FIXME
  */
-public class MainViewPagerAdapter extends FragmentPagerAdapter {
+public class CustomViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> fragments;
-    private final String[] titles = new String[]{
-            "正在热映", "即将上映", "TOP榜"
-    };
+    private final String[] titles;
 
-    public MainViewPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+    public CustomViewPagerAdapter(FragmentManager fm, List<Fragment> fragments, String[] titles) {
         super(fm);
         this.fragments = fragments;
+        this.titles = titles;
     }
 
     @Override

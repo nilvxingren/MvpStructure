@@ -7,9 +7,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import app.season.mvpstructure.data.bean.InTheatersResponse;
 import app.season.mvpstructure.data.bean.LoginRequest;
 import app.season.mvpstructure.data.bean.LoginResponse;
+import app.season.mvpstructure.data.bean.MovieIntroduceResponse;
+import app.season.mvpstructure.data.bean.MovieListResponse;
 import app.season.mvpstructure.data.bean.Note;
 import app.season.mvpstructure.data.bean.Repo;
 import app.season.mvpstructure.data.local.DataBaseHelper;
@@ -66,9 +67,18 @@ public class DataManager {
         return mDataBaseHelper.deleteNote(rowId);
     }
 
-    /*****DouBan*****/
-    public Observable<InTheatersResponse> getInTheaters(String city) {
+    /*****
+     * DouBan
+     *****/
+    public Observable<MovieListResponse> getInTheaters(String city) {
         return mDouBanService.getInTheaters(city);
     }
 
+    public Observable<MovieListResponse> getComingSoon(int start, int count) {
+        return mDouBanService.getComingSoon(start, count);
+    }
+
+    public Observable<MovieIntroduceResponse> getMovieIntroduce(String id) {
+        return mDouBanService.getMovieIntroduce(id);
+    }
 }

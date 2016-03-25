@@ -1,4 +1,4 @@
-package app.season.mvpstructure.ui.main;
+package app.season.mvpstructure.ui.repo;
 
 import android.content.Context;
 

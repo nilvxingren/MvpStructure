@@ -5,13 +5,15 @@ import android.content.Context;
 import java.util.concurrent.TimeUnit;
 
 import app.season.mvpstructure.BuildConfig;
-import app.season.mvpstructure.data.bean.InTheatersResponse;
+import app.season.mvpstructure.data.bean.MovieIntroduceResponse;
+import app.season.mvpstructure.data.bean.MovieListResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -26,7 +28,13 @@ public interface DouBanService {
     String ENDPOINT = "https://api.douban.com/v2/";
 
     @GET("movie/in_theaters")
-    Observable<InTheatersResponse> getInTheaters(@Query("city") String city);
+    Observable<MovieListResponse> getInTheaters(@Query("city") String city);
+
+    @GET("movie/coming_soon")
+    Observable<MovieListResponse> getComingSoon(@Query("start") int start, @Query("count") int count);
+
+    @GET("movie/subject/{id}")
+    Observable<MovieIntroduceResponse> getMovieIntroduce(@Path("id") String id);
 
     /**
      * Create a new GitHubService

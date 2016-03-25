@@ -1,4 +1,4 @@
-package app.season.mvpstructure.ui.main;
+package app.season.mvpstructure.ui.mainfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,7 +19,7 @@ public class TopFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_in_theaters, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie_list, container, false);
         return view;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * Time: 13:12
  * FIXME
  */
-public class InTheatersResponse {
+public class MovieListResponse {
 
     /**
      * count : 20

@@ -1,4 +1,4 @@
-package app.season.mvpstructure.ui.main;
+package app.season.mvpstructure.ui.mainfragment;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,7 +14,7 @@ import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import javax.inject.Inject;
 
 import app.season.mvpstructure.R;
-import app.season.mvpstructure.data.bean.InTheatersResponse;
+import app.season.mvpstructure.data.bean.MovieListResponse;
 import app.season.mvpstructure.injection.ActivityContext;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * Time: 13:12
  * FIXME
  */
-public class MovieAdapter extends RecyclerArrayAdapter<InTheatersResponse.SubjectsEntity> {
+public class MovieAdapter extends RecyclerArrayAdapter<MovieListResponse.SubjectsEntity> {
 
     @Inject
     public MovieAdapter(@ActivityContext Context context) {
@@ -39,7 +39,8 @@ public class MovieAdapter extends RecyclerArrayAdapter<InTheatersResponse.Subjec
         return new ViewHolder(view);
     }
 
-    static class ViewHolder extends BaseViewHolder<InTheatersResponse.SubjectsEntity> {
+
+    static class ViewHolder extends BaseViewHolder<MovieListResponse.SubjectsEntity> {
         @Bind(R.id.movie_picture)
         SimpleDraweeView moviePicture;
         @Bind(R.id.movie_name)
@@ -53,7 +54,7 @@ public class MovieAdapter extends RecyclerArrayAdapter<InTheatersResponse.Subjec
         }
 
         @Override
-        public void setData(InTheatersResponse.SubjectsEntity data) {
+        public void setData(MovieListResponse.SubjectsEntity data) {
             super.setData(data);
             moviePicture.setImageURI(Uri.parse(data.getImages().getSmall()));
             movieName.setText(data.getTitle());
