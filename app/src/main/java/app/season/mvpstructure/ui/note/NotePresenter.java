@@ -16,9 +16,10 @@ import app.season.mvpstructure.ui.base.BaseSubscriber;
 /**
  * the noteActivity's presenter
  *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/24.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class NotePresenter extends BasePresenter<INoteMvpView> {
 
@@ -28,21 +29,21 @@ public class NotePresenter extends BasePresenter<INoteMvpView> {
     }
 
     public void delete(int rowId, int position) {
-        int rows = dataManager.deleteNote(rowId);
+        int rows = mDataManager.deleteNote(rowId);
         if (rows >= 0) {
             getMvpView().deleteNote(position);
         }
     }
 
     public void insert(Note note) {
-        long rowId = dataManager.insertNote(note);
+        long rowId = mDataManager.insertNote(note);
         if (rowId >= 0) {
             getMvpView().addNote(note);
         }
     }
 
     public void query() {
-        doNormalSubscribe(dataManager.queryAllNotes(), new NoteSubscriber(context));
+        doNormalSubscribe(mDataManager.queryAllNotes(), new NoteSubscriber(mContext));
     }
 
     private class NoteSubscriber extends BaseSubscriber<Note> {

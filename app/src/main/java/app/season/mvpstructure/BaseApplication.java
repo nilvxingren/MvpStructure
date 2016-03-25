@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -17,10 +18,10 @@ import app.season.mvpstructure.injection.module.ApplicationModule;
 import timber.log.Timber;
 
 /**
- * BaseApplication
- *
- * @author Season
- * @version 0.1
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class BaseApplication extends Application {
     @Inject
@@ -31,6 +32,10 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        /**
+         *初始化Fresco
+         */
+        Fresco.initialize(this);
 
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))

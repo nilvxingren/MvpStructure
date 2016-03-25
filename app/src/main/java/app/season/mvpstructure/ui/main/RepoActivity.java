@@ -31,11 +31,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * RepoActivity
- *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/22.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class RepoActivity extends BaseActivity implements IRepoMvpView {
 

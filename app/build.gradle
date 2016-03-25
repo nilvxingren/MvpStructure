@@ -85,8 +85,14 @@ dependencies {
     apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
 
+    //Fresco
+    compile 'com.facebook.fresco:fresco:0.9.0'
+
     //MaterialSearchView
     compile 'com.miguelcatalan:materialsearchview:1.4.0'
+
+    //EasyRecyclerView
+    compile 'com.jude:easyrecyclerview:3.4.4'
 
     // Instrumentation test dependencies
     androidTestCompile "junit:junit:$JUNIT_VERSION"

@@ -3,10 +3,11 @@ package app.season.mvpstructure.ui.base;
 /**
  * Base interface that any class that wants to act as a View in the MVP (Model View Presenter)
  * pattern must implement.
- *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/21.
+ * <p/>
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public interface IMvpView {
     void showShortMessage(String message);

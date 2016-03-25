@@ -7,6 +7,7 @@ import com.squareup.otto.Bus;
 
 import javax.inject.Singleton;
 
+import app.season.mvpstructure.data.remote.DouBanService;
 import app.season.mvpstructure.data.remote.GitHubService;
 import app.season.mvpstructure.data.remote.KtLoginService;
 import app.season.mvpstructure.injection.ApplicationContext;
@@ -55,4 +56,9 @@ public class ApplicationModule {
         return KtLoginService.Factory.createService(mApplication);
     }
 
+    @Provides
+    @Singleton
+    DouBanService provideDoubanService() {
+        return DouBanService.Factory.createService(mApplication);
+    }
 }

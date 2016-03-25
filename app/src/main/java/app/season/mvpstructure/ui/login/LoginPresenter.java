@@ -15,9 +15,10 @@ import rx.Subscription;
 /**
  * Login Presenter
  *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/22.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class LoginPresenter extends BasePresenter<ILoginMvpView> {
 
@@ -30,7 +31,7 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
 
     public void login(LoginRequest loginRequest) {
         getMvpView().showProgressDialog("登录中", false);
-        subscription = doNormalSubscribe(dataManager.login(loginRequest), new LoginSubscriber(context));
+        subscription = doNormalSubscribe(mDataManager.login(loginRequest), new LoginSubscriber(mContext));
     }
 
     private class LoginSubscriber extends BaseSubscriber<LoginResponse> {

@@ -3,9 +3,10 @@ package app.season.mvpstructure.ui.login;
 import app.season.mvpstructure.ui.base.IMvpView;
 
 /**
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/22.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public interface ILoginMvpView extends IMvpView {
     void loginSuccess();

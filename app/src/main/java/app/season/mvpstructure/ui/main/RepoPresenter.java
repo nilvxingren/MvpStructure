@@ -12,11 +12,11 @@ import app.season.mvpstructure.injection.ActivityContext;
 import app.season.mvpstructure.ui.base.BasePresenter;
 import app.season.mvpstructure.ui.base.BaseSubscriber;
 import rx.Subscription;
-
 /**
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/21.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class RepoPresenter extends BasePresenter<IRepoMvpView> {
 
@@ -29,7 +29,7 @@ public class RepoPresenter extends BasePresenter<IRepoMvpView> {
 
     public void listRepos(String userName) {
         getMvpView().showLoading();
-        subscription = doNormalSubscribe(dataManager.listRepos(userName), new GetReposSubscriber(context));
+        subscription = doNormalSubscribe(mDataManager.listRepos(userName), new GetReposSubscriber(mContext));
     }
 
     private class GetReposSubscriber extends BaseSubscriber<List<Repo>> {

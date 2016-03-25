@@ -13,22 +13,21 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * BasePresenter
- *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/21.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class BasePresenter<V extends IMvpView> implements IPresenter<V> {
     private V mMvpView;
 
-    public final Context context;
-    public final DataManager dataManager;
+    public final Context mContext;
+    public final DataManager mDataManager;
 
     @Inject
     public BasePresenter(@ActivityContext Context context, DataManager dataManager) {
-        this.context = context;
-        this.dataManager = dataManager;
+        this.mContext = context;
+        this.mDataManager = dataManager;
     }
 
     @Override

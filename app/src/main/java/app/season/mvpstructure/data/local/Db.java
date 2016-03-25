@@ -8,9 +8,10 @@ import app.season.mvpstructure.data.bean.Note;
 /**
  * Db
  *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/24.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class Db {
     public Db() {

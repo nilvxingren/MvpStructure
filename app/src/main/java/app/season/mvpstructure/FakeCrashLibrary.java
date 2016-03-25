@@ -2,10 +2,11 @@ package app.season.mvpstructure;
 
 /**
  * Not a real crash reporting library!
- *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/22.
+ * <p/>
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public final class FakeCrashLibrary {
     public static void log(int priority, String tag, String message) {

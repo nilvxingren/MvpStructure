@@ -7,39 +7,43 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import app.season.mvpstructure.data.bean.InTheatersResponse;
 import app.season.mvpstructure.data.bean.LoginRequest;
 import app.season.mvpstructure.data.bean.LoginResponse;
 import app.season.mvpstructure.data.bean.Note;
 import app.season.mvpstructure.data.bean.Repo;
 import app.season.mvpstructure.data.local.DataBaseHelper;
 import app.season.mvpstructure.data.local.PreferencesHelper;
+import app.season.mvpstructure.data.remote.DouBanService;
 import app.season.mvpstructure.data.remote.GitHubService;
 import app.season.mvpstructure.data.remote.KtLoginService;
 import rx.Observable;
 
 /**
  * the DataManager control all data include local、remote
- *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/21.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 @Singleton
 public class DataManager {
     private final GitHubService mGitHubService;
     private final KtLoginService mKtLoginService;
-    private final PreferencesHelper preferencesHelper;
-    private final DataBaseHelper dataBaseHelper;
+    private final PreferencesHelper mPreferencesHelper;
+    private final DataBaseHelper mDataBaseHelper;
+    private final DouBanService mDouBanService;
 
     @Inject
     public DataManager(GitHubService mGitHubService,
                        KtLoginService mKtLoginService,
                        PreferencesHelper preferencesHelper,
-                       DataBaseHelper dataBaseHelper) {
+                       DataBaseHelper dataBaseHelper, DouBanService douBanService) {
         this.mGitHubService = mGitHubService;
         this.mKtLoginService = mKtLoginService;
-        this.preferencesHelper = preferencesHelper;
-        this.dataBaseHelper = dataBaseHelper;
+        this.mPreferencesHelper = preferencesHelper;
+        this.mDataBaseHelper = dataBaseHelper;
+        mDouBanService = douBanService;
     }
 
     public Observable<LoginResponse> login(LoginRequest loginRequest) {
@@ -51,15 +55,20 @@ public class DataManager {
     }
 
     public Observable<Note> queryAllNotes() {
-        return dataBaseHelper.queryAllNotes();
+        return mDataBaseHelper.queryAllNotes();
     }
 
     public long insertNote(Note note) {
-        return dataBaseHelper.insertNote(note);
+        return mDataBaseHelper.insertNote(note);
     }
 
     public int deleteNote(int rowId) {
-        return dataBaseHelper.deleteNote(rowId);
+        return mDataBaseHelper.deleteNote(rowId);
+    }
+
+    /*****DouBan*****/
+    public Observable<InTheatersResponse> getInTheaters(String city) {
+        return mDouBanService.getInTheaters(city);
     }
 
 }

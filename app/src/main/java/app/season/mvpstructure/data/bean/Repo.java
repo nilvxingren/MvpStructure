@@ -3,11 +3,10 @@ package app.season.mvpstructure.data.bean;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * GitHub repo entity
- *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/22.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class Repo {
 

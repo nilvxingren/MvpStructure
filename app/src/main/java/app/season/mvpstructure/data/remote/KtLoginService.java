@@ -20,9 +20,10 @@ import rx.Observable;
 /**
  * Login test service
  *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/22.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public interface KtLoginService {
     String ENDPOINT = "http://api2.kuaiti8.com/api/";

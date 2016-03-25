@@ -16,9 +16,12 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 /**
- * Created by Season on 2016/3/25.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-03-25
+ * Time: 13:16
+ * FIXME
  */
-public interface DoubanService {
+public interface DouBanService {
 
     String ENDPOINT = "https://api.douban.com/v2/";
 
@@ -29,7 +32,7 @@ public interface DoubanService {
      * Create a new GitHubService
      */
     class Factory {
-        public static DoubanService createService(Context context) {
+        public static DouBanService createService(Context context) {
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
             builder.readTimeout(10, TimeUnit.SECONDS);
             builder.connectTimeout(5, TimeUnit.SECONDS);
@@ -54,13 +57,13 @@ public interface DoubanService {
 //                    .create();
 
             Retrofit retrofit =
-                    new Retrofit.Builder().baseUrl(DoubanService.ENDPOINT)
+                    new Retrofit.Builder().baseUrl(DouBanService.ENDPOINT)
                             .client(client)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .build();
 
-            return retrofit.create(DoubanService.class);
+            return retrofit.create(DouBanService.class);
         }
     }
 }

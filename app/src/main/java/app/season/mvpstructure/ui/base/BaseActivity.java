@@ -11,14 +11,13 @@ import app.season.mvpstructure.injection.component.DaggerActivityComponent;
 import app.season.mvpstructure.injection.module.ActivityModule;
 
 /**
- * BaseActivity
- *
- * @author Season
- * @version 0.1
- *          Created by Season on 2016/3/21.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public abstract class BaseActivity extends AppCompatActivity implements IMvpView {
-    protected ProgressDialog progressDialog;
+    protected ProgressDialog mProgressDialog;
     private ActivityComponent mActivityComponent;
 
     public ActivityComponent getActivityComponent() {
@@ -46,17 +45,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IMvpView
     }
 
     public void showProgressDialog(String content, boolean canDismiss) {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(this);
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
         }
-        progressDialog.setCanceledOnTouchOutside(canDismiss);
-        progressDialog.setMessage(content);
-        progressDialog.show();
+        mProgressDialog.setCanceledOnTouchOutside(canDismiss);
+        mProgressDialog.setMessage(content);
+        mProgressDialog.show();
     }
 
     public void hideProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
         }
     }
 }

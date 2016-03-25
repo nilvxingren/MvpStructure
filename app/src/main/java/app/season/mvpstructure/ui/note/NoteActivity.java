@@ -19,7 +19,12 @@ import app.season.mvpstructure.ui.base.BaseActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+/**
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
+ */
 public class NoteActivity extends BaseActivity implements INoteMvpView, NoteAdapter.OnItemClickListener {
 
     @Bind(R.id.toolbar)

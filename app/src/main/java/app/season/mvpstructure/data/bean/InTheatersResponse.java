@@ -3,7 +3,10 @@ package app.season.mvpstructure.data.bean;
 import java.util.List;
 
 /**
- * Created by Season on 2016/3/25.
+ * User: Season(ssseasonnn@gmail.com)
+ * Date: 2016-3-25
+ * Time: 13:12
+ * FIXME
  */
 public class InTheatersResponse {
 
