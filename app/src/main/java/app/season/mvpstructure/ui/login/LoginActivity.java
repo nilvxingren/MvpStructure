@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.data.bean.LoginRequest;
 import app.season.mvpstructure.ui.base.BaseActivity;
-import app.season.mvpstructure.ui.main.MainActivity;
+import app.season.mvpstructure.ui.main.RepoActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -78,7 +78,7 @@ public class LoginActivity extends BaseActivity implements ILoginMvpView {
     @Override
     public void loginSuccess() {
         Intent intent = new Intent();
-        intent.setClass(LoginActivity.this, MainActivity.class);
+        intent.setClass(LoginActivity.this, RepoActivity.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 //            startActivity(intent,
 //                    ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this).toBundle());

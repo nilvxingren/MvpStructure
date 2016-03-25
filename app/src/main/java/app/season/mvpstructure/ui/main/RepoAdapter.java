@@ -18,19 +18,19 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * MainActivity's Adapter
+ * RepoActivity's Adapter
  *
  * @author Season
  * @version 0.1
  *          Created by Season on 2016/3/22.
  */
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
+public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.ViewHolder> {
 
 
     private List<Repo> mData;
 
     @Inject
-    public MainAdapter() {
+    public RepoAdapter() {
         mData = new ArrayList<>();
     }
 

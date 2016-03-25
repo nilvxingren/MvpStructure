@@ -7,7 +7,7 @@ import app.season.mvpstructure.injection.ActivityContext;
 import app.season.mvpstructure.injection.PerActivity;
 import app.season.mvpstructure.injection.module.ActivityModule;
 import app.season.mvpstructure.ui.login.LoginActivity;
-import app.season.mvpstructure.ui.main.MainActivity;
+import app.season.mvpstructure.ui.main.RepoActivity;
 import app.season.mvpstructure.ui.note.NoteActivity;
 import dagger.Component;
 
@@ -20,7 +20,7 @@ public interface ActivityComponent {
 
     void inject(LoginActivity loginActivity);
 
-    void inject(MainActivity mainActivity);
+    void inject(RepoActivity repoActivity);
 
     void inject(NoteActivity noteActivity);
 

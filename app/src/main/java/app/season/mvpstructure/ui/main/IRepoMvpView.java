@@ -10,7 +10,7 @@ import app.season.mvpstructure.ui.base.IMvpView;
  * @version 0.1
  *          Created by Season on 2016/3/21.
  */
-public interface IMainMvpView extends IMvpView {
+public interface IRepoMvpView extends IMvpView {
     void onListRepos(List<Repo> list);
 
     void onNetworkError();

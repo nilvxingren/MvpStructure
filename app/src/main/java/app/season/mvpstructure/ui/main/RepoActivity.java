@@ -31,13 +31,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * MainActivity
+ * RepoActivity
  *
  * @author Season
  * @version 0.1
  *          Created by Season on 2016/3/22.
  */
-public class MainActivity extends BaseActivity implements IMainMvpView {
+public class RepoActivity extends BaseActivity implements IRepoMvpView {
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
@@ -53,14 +53,14 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     ContentLoadingProgressBar progressBar;
 
     @Inject
-    MainPresenter mainPresenter;
+    RepoPresenter repoPresenter;
 
     @Inject
-    MainAdapter mainAdapter;
+    RepoAdapter repoAdapter;
 
     @OnClick(R.id.network_error)
     public void onClick() {
-        mainPresenter.listRepos("ssseasonnn");
+        repoPresenter.listRepos("ssseasonnn");
     }
 
     @Override
@@ -77,13 +77,13 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
         setSupportActionBar(toolbar);
 
         getActivityComponent().inject(this);
-        mainPresenter.attachView(this);
+        repoPresenter.attachView(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(linearLayoutManager);
 //        recycler.addItemDecoration();
-        recycler.setAdapter(mainAdapter);
+        recycler.setAdapter(repoAdapter);
 
         searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
@@ -115,13 +115,13 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
     @Override
     protected void onStart() {
         super.onStart();
-        mainPresenter.listRepos("ssseasonnn");
+        repoPresenter.listRepos("ssseasonnn");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mainPresenter.detachView();
+        repoPresenter.detachView();
     }
 
     @Override
@@ -153,19 +153,19 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         Intent intent = new Intent();
-        intent.setClass(MainActivity.this, NoteActivity.class);
+        intent.setClass(RepoActivity.this, NoteActivity.class);
         startActivity(intent);
     }
 
     /**
-     * implement IMainMvpView method
+     * implement IRepoMvpView method
      */
     @Override
     public void onListRepos(List<Repo> list) {
         recycler.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
         networkError.setVisibility(View.GONE);
-        mainAdapter.addData(list);
+        repoAdapter.addData(list);
     }
 
     @Override

@@ -18,12 +18,12 @@ import rx.Subscription;
  * @version 0.1
  *          Created by Season on 2016/3/21.
  */
-public class MainPresenter extends BasePresenter<IMainMvpView> {
+public class RepoPresenter extends BasePresenter<IRepoMvpView> {
 
     private Subscription subscription;
 
     @Inject
-    public MainPresenter(@ActivityContext Context context, DataManager dataManager) {
+    public RepoPresenter(@ActivityContext Context context, DataManager dataManager) {
         super(context, dataManager);
     }
 
