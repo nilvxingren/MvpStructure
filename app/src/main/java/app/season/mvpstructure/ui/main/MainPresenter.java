@@ -57,9 +57,9 @@ public class MainPresenter extends BasePresenter<IMainMvpView> {
 
     @Override
     public void detachView() {
-        if (subscription.isUnsubscribed()) {
+        super.detachView();
+        if (subscription != null) {
             subscription.unsubscribe();
         }
-        super.detachView();
     }
 }

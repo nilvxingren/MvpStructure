@@ -10,6 +10,7 @@ import app.season.mvpstructure.data.bean.LoginResponse;
 import app.season.mvpstructure.injection.ActivityContext;
 import app.season.mvpstructure.ui.base.BasePresenter;
 import app.season.mvpstructure.ui.base.BaseSubscriber;
+import rx.Subscription;
 
 /**
  * Login Presenter
@@ -20,6 +21,8 @@ import app.season.mvpstructure.ui.base.BaseSubscriber;
  */
 public class LoginPresenter extends BasePresenter<ILoginMvpView> {
 
+    private Subscription subscription;
+
     @Inject
     public LoginPresenter(@ActivityContext Context context, DataManager mDataManager) {
         super(context, mDataManager);
@@ -27,7 +30,7 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
 
     public void login(LoginRequest loginRequest) {
         getMvpView().showProgressDialog("登录中", false);
-        doNormalSubscribe(dataManager.login(loginRequest), new LoginSubscriber(context));
+        subscription = doNormalSubscribe(dataManager.login(loginRequest), new LoginSubscriber(context));
     }
 
     private class LoginSubscriber extends BaseSubscriber<LoginResponse> {
@@ -57,6 +60,14 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
         public void onError(Throwable e) {
             super.onError(e);
             getMvpView().hideProgressDialog();
+        }
+    }
+
+    @Override
+    public void detachView() {
+        super.detachView();
+        if (subscription != null) {
+            subscription.unsubscribe();
         }
     }
 }

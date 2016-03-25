@@ -120,8 +120,8 @@ public class MainActivity extends BaseActivity implements IMainMvpView {
 
     @Override
     protected void onDestroy() {
-        mainPresenter.detachView();
         super.onDestroy();
+        mainPresenter.detachView();
     }
 
     @Override

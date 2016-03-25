@@ -55,8 +55,8 @@ public class LoginActivity extends BaseActivity implements ILoginMvpView {
 
     @Override
     protected void onDestroy() {
-        loginPresenter.detachView();
         super.onDestroy();
+        loginPresenter.detachView();
     }
 
     @OnClick(R.id.login)
