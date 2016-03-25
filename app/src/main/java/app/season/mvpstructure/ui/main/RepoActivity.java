@@ -72,7 +72,7 @@ public class RepoActivity extends BaseActivity implements IRepoMvpView {
             getWindow().setExitTransition(new Explode());
         }
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_repo);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 

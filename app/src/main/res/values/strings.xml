@@ -9,4 +9,8 @@
     <string name="default_password">111111</string>
     <string name="network_error">网络错误，请检查网络设置</string>
     <string name="title_activity_note">NoteActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
