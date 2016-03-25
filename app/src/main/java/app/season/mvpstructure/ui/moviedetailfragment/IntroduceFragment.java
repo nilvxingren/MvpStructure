@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import app.season.mvpstructure.R;
-import app.season.mvpstructure.data.bean.MovieListResponse;
 import app.season.mvpstructure.ui.base.BaseFragment;
 import app.season.mvpstructure.ui.mainfragment.IMovieMvpView;
 import app.season.mvpstructure.ui.mainfragment.MoviePresenter;
@@ -31,7 +28,8 @@ public class IntroduceFragment extends BaseFragment implements IMovieMvpView {
     @Bind(R.id.recycler)
     EasyRecyclerView mRecycler;
 
-
+    @Inject
+    MovieAdapter mMovieAdapter;
     @Inject
     MoviePresenter mMoviePresenter;
 
