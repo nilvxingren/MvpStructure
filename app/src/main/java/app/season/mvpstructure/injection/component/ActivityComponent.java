@@ -11,7 +11,6 @@ import app.season.mvpstructure.ui.mainfragment.ComingSoonFragment;
 import app.season.mvpstructure.ui.mainfragment.InTheatersFragment;
 import app.season.mvpstructure.ui.moviedetailfragment.IntroduceFragment;
 import app.season.mvpstructure.ui.note.NoteActivity;
-import app.season.mvpstructure.ui.repo.RepoActivity;
 import dagger.Component;
 
 /**
@@ -22,8 +21,6 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(LoginActivity loginActivity);
-
-    void inject(RepoActivity repoActivity);
 
     void inject(NoteActivity noteActivity);
 

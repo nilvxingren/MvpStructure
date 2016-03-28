@@ -8,7 +8,6 @@ import com.squareup.otto.Bus;
 import javax.inject.Singleton;
 
 import app.season.mvpstructure.data.remote.DouBanService;
-import app.season.mvpstructure.data.remote.GitHubService;
 import app.season.mvpstructure.data.remote.KtLoginService;
 import app.season.mvpstructure.injection.ApplicationContext;
 import dagger.Module;
@@ -42,12 +41,6 @@ public class ApplicationModule {
     @Singleton
     Bus provideEventBus() {
         return new Bus();
-    }
-
-    @Provides
-    @Singleton
-    GitHubService provideGitHubService() {
-        return GitHubService.Factory.createService(mApplication);
     }
 
     @Provides

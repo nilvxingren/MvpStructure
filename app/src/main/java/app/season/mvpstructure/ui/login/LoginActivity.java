@@ -15,14 +15,14 @@ import javax.inject.Inject;
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.data.bean.LoginRequest;
 import app.season.mvpstructure.ui.base.BaseActivity;
-import app.season.mvpstructure.ui.repo.RepoActivity;
+import app.season.mvpstructure.ui.main.MainActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * LoginActivity
- *
+ * <p>
  * User: Season(ssseasonnn@gmail.com)
  * Date: 2016-3-25
  * Time: 13:12
@@ -79,7 +79,7 @@ public class LoginActivity extends BaseActivity implements ILoginMvpView {
     @Override
     public void loginSuccess() {
         Intent intent = new Intent();
-        intent.setClass(LoginActivity.this, RepoActivity.class);
+        intent.setClass(LoginActivity.this, MainActivity.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 //            startActivity(intent,
 //                    ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
