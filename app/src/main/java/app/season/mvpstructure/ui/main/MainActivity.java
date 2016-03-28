@@ -1,5 +1,6 @@
 package app.season.mvpstructure.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,6 +24,7 @@ import app.season.mvpstructure.ui.base.BaseActivity;
 import app.season.mvpstructure.ui.mainfragment.ComingSoonFragment;
 import app.season.mvpstructure.ui.mainfragment.InTheatersFragment;
 import app.season.mvpstructure.ui.mainfragment.TopFragment;
+import app.season.mvpstructure.ui.note.NoteActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -135,6 +137,9 @@ public class MainActivity extends BaseActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, NoteActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

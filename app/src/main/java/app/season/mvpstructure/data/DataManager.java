@@ -40,10 +40,12 @@ public class DataManager {
         mDouBanService = douBanService;
     }
 
+    //Login Data
     public Observable<LoginResponse> login(LoginRequest loginRequest) {
         return mKtLoginService.login(0, "0", "", "login", new Gson().toJson(loginRequest));
     }
 
+    //Database Data
     public Observable<Note> queryAllNotes() {
         return mDataBaseHelper.queryAllNotes();
     }
@@ -56,9 +58,7 @@ public class DataManager {
         return mDataBaseHelper.deleteNote(rowId);
     }
 
-    /*****
-     * DouBan
-     *****/
+    //DouBan Movie Data
     public Observable<MovieListResponse> getInTheaters(String city) {
         return mDouBanService.getInTheaters(city);
     }

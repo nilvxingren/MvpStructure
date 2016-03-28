@@ -31,46 +31,28 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity implements ILoginMvpView {
 
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @Bind(R.id.name)
-    EditText name;
+    EditText mName;
     @Bind(R.id.password)
-    EditText password;
+    EditText mPassword;
     @Bind(R.id.login)
-    Button login;
+    Button mLogin;
 
     @Inject
-    LoginPresenter loginPresenter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
-        getActivityComponent().inject(this);
-        loginPresenter.attachView(this);
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        loginPresenter.detachView();
-    }
+    LoginPresenter mLoginPresenter;
 
     @OnClick(R.id.login)
     public void onClick() {
-        String nameStr = name.getText().toString().trim();
-        String passStr = password.getText().toString().trim();
+        String nameStr = mName.getText().toString().trim();
+        String passStr = mPassword.getText().toString().trim();
         if (TextUtils.isEmpty(nameStr)) {
             return;
         }
         if (TextUtils.isEmpty(passStr)) {
             return;
         }
-        loginPresenter.login(new LoginRequest(nameStr, passStr));
+        mLoginPresenter.login(new LoginRequest(nameStr, passStr));
     }
 
     /**
@@ -84,7 +66,7 @@ public class LoginActivity extends BaseActivity implements ILoginMvpView {
 //            startActivity(intent,
 //                    ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
             startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                    login,
+                    mLogin,
                     "share").toBundle());
         } else {
             startActivity(intent);
@@ -97,4 +79,21 @@ public class LoginActivity extends BaseActivity implements ILoginMvpView {
     }
 
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
+
+        getActivityComponent().inject(this);
+        mLoginPresenter.attachView(this);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLoginPresenter.detachView();
+    }
 }

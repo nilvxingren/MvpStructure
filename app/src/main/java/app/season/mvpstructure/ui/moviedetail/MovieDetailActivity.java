@@ -88,5 +88,4 @@ public class MovieDetailActivity extends BaseActivity {
         // 将TabLayout和ViewPager进行关联，让两者联动起来
         mTablayout.setupWithViewPager(mViewpager);
     }
-
 }

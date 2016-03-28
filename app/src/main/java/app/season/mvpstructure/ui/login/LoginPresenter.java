@@ -22,7 +22,7 @@ import rx.Subscription;
  */
 public class LoginPresenter extends BasePresenter<ILoginMvpView> {
 
-    private Subscription subscription;
+    private Subscription mSubscription;
 
     @Inject
     public LoginPresenter(@ActivityContext Context context, DataManager mDataManager) {
@@ -31,7 +31,7 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
 
     public void login(LoginRequest loginRequest) {
         getMvpView().showProgressDialog("登录中", false);
-        subscription = doNormalSubscribe(mDataManager.login(loginRequest), new LoginSubscriber(mContext));
+        mSubscription = doNormalSubscribe(mDataManager.login(loginRequest), new LoginSubscriber(mContext));
     }
 
     private class LoginSubscriber extends BaseSubscriber<LoginResponse> {
@@ -67,8 +67,8 @@ public class LoginPresenter extends BasePresenter<ILoginMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (subscription != null) {
-            subscription.unsubscribe();
+        if (mSubscription != null) {
+            mSubscription.unsubscribe();
         }
     }
 }

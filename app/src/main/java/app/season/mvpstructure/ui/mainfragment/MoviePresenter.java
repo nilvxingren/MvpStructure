@@ -20,7 +20,7 @@ import rx.Subscription;
 
 /**
  * Business logic for dealing with movies
- * <p/>
+ * <p>
  * User: Season(ssseasonnn@gmail.com)
  * Date: 2016-03-25
  * Time: 13:16
@@ -44,6 +44,9 @@ public class MoviePresenter extends BasePresenter<IMovieMvpView> {
         }
         if (mCommingSoonSubscription != null) {
             mCommingSoonSubscription.unsubscribe();
+        }
+        if (mMovieIntroduceSubscription != null) {
+            mMovieIntroduceSubscription.unsubscribe();
         }
     }
 

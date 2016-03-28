@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -19,6 +20,7 @@ import app.season.mvpstructure.ui.base.BaseActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 /**
  * User: Season(ssseasonnn@gmail.com)
  * Date: 2016-3-25
@@ -28,77 +30,84 @@ import butterknife.OnClick;
 public class NoteActivity extends BaseActivity implements INoteMvpView, NoteAdapter.OnItemClickListener {
 
     @Bind(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar mToolbar;
     @Bind(R.id.search_view)
-    MaterialSearchView searchView;
+    MaterialSearchView mSearchView;
     @Bind(R.id.edit)
-    EditText edit;
+    EditText mEdit;
     @Bind(R.id.button)
-    Button button;
+    Button mButton;
     @Bind(R.id.recycler)
-    RecyclerView recycler;
+    RecyclerView mRecycler;
 
     @Inject
-    NoteAdapter noteAdapter;
+    NoteAdapter mNoteAdapter;
     @Inject
-    NotePresenter notePresenter;
+    NotePresenter mNotePresenter;
+
+    @OnClick(R.id.button)
+    public void onClick() {
+        Note note = new Note();
+        note.text = mEdit.getText().toString().trim();
+        note.date = "2016-3-24";
+        mNotePresenter.insert(note);
+    }
+
+    @Override
+    public void addNote(Note note) {
+        mNoteAdapter.addNote(note);
+    }
+
+    @Override
+    public void deleteNote(int position) {
+        mNoteAdapter.deleteNote(position);
+    }
+
+    @Override
+    public void addData(List<Note> notes) {
+        mNoteAdapter.addData(notes);
+    }
+
+    @Override
+    public void onItemClick(int rowId, int position) {
+        mNotePresenter.delete(rowId, position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         getActivityComponent().inject(this);
-        notePresenter.attachView(this);
+        mNotePresenter.attachView(this);
 
-        noteAdapter.setOnItemClickListener(this);
+        mNoteAdapter.setOnItemClickListener(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recycler.setLayoutManager(linearLayoutManager);
-//        recycler.addItemDecoration();
-        recycler.setAdapter(noteAdapter);
+        mRecycler.setLayoutManager(linearLayoutManager);
+//        mRecycler.addItemDecoration();
+        mRecycler.setAdapter(mNoteAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        notePresenter.query();
+        mNotePresenter.query();
     }
 
     @Override
     protected void onDestroy() {
-        notePresenter.detachView();
         super.onDestroy();
-    }
-
-    @OnClick(R.id.button)
-    public void onClick() {
-        Note note = new Note();
-        note.text = edit.getText().toString().trim();
-        note.date = "2016-3-24";
-        notePresenter.insert(note);
-    }
-
-    @Override
-    public void addNote(Note note) {
-        noteAdapter.addNote(note);
-    }
-
-    @Override
-    public void deleteNote(int position) {
-        noteAdapter.deleteNote(position);
-    }
-
-    @Override
-    public void addData(List<Note> notes) {
-        noteAdapter.addData(notes);
-    }
-
-    @Override
-    public void onItemClick(int rowId, int position) {
-        notePresenter.delete(rowId, position);
+        mNotePresenter.detachView();
     }
 }
