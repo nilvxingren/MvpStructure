@@ -20,9 +20,9 @@ import java.util.List;
 
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.ui.base.BaseActivity;
-import app.season.mvpstructure.ui.main.mainfragment.ComingSoonFragment;
-import app.season.mvpstructure.ui.main.mainfragment.InTheatersFragment;
-import app.season.mvpstructure.ui.main.mainfragment.TopFragment;
+import app.season.mvpstructure.ui.mainfragment.ComingSoonFragment;
+import app.season.mvpstructure.ui.mainfragment.InTheatersFragment;
+import app.season.mvpstructure.ui.mainfragment.TopFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 

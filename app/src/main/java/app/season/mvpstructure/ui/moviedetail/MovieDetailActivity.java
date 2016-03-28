@@ -15,14 +15,15 @@ import java.util.List;
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.ui.base.BaseActivity;
 import app.season.mvpstructure.ui.main.CustomViewPagerAdapter;
-import app.season.mvpstructure.ui.moviedetail.moviedetailfragment.IntroduceFragment;
-import app.season.mvpstructure.ui.moviedetail.moviedetailfragment.ShortCommentFragment;
-import app.season.mvpstructure.ui.moviedetail.moviedetailfragment.StillsFragment;
+import app.season.mvpstructure.ui.moviedetailfragment.IntroduceFragment;
+import app.season.mvpstructure.ui.moviedetailfragment.ShortCommentFragment;
+import app.season.mvpstructure.ui.moviedetailfragment.StillsFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
 public class MovieDetailActivity extends BaseActivity {
+    public static final String INTENT_MOVIE_ID = "movie_id";
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
@@ -46,6 +47,16 @@ public class MovieDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,10 +65,12 @@ public class MovieDetailActivity extends BaseActivity {
             }
         });
 
+        String movieId = getIntent().getStringExtra(INTENT_MOVIE_ID);
         //初始化填充到ViewPager中的Fragment集合
         mFragments = new ArrayList<>();
 
         IntroduceFragment introduceFragment = new IntroduceFragment();
+        introduceFragment.setId(movieId);
         ShortCommentFragment shortCommentFragment = new ShortCommentFragment();
         StillsFragment stillsFragment = new StillsFragment();
         mFragments.add(introduceFragment);

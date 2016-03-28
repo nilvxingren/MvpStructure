@@ -2,6 +2,8 @@ package app.season.mvpstructure.ui.mainfragment;
 
 import android.content.Context;
 
+import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
+
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -12,6 +14,8 @@ import app.season.mvpstructure.data.bean.MovieListResponse;
 import app.season.mvpstructure.injection.ActivityContext;
 import app.season.mvpstructure.ui.base.BasePresenter;
 import app.season.mvpstructure.ui.base.BaseSubscriber;
+import app.season.mvpstructure.ui.moviedetailfragment.IMovieIntroduceMvpView;
+import app.season.mvpstructure.ui.moviedetailfragment.MovieIntroduceAdapter;
 import rx.Subscription;
 
 /**
@@ -82,13 +86,14 @@ public class MoviePresenter extends BasePresenter<IMovieMvpView> {
         @Override
         public void onNext(MovieListResponse movieListResponse) {
             super.onNext(movieListResponse);
-            getMvpView().getAdapter().addAll(movieListResponse.getSubjects());
+            ((RecyclerArrayAdapter) (getMvpView().getAdapter())).addAll(movieListResponse.getSubjects());
         }
 
         @Override
         public void onError(Throwable e) {
             super.onError(e);
-            getMvpView().getAdapter().addAll(new ArrayList<MovieListResponse.SubjectsEntity>());
+            ((RecyclerArrayAdapter) (getMvpView().getAdapter())).addAll(new ArrayList<MovieListResponse
+                    .SubjectsEntity>());
         }
     }
 
@@ -96,6 +101,30 @@ public class MoviePresenter extends BasePresenter<IMovieMvpView> {
 
         public MovieIntroduceSubscriber(Context context) {
             super(context);
+        }
+
+        @Override
+        public void onNext(MovieIntroduceResponse movieIntroduceResponse) {
+            super.onNext(movieIntroduceResponse);
+            if (getMvpView() instanceof IMovieIntroduceMvpView) {
+                MovieIntroduceAdapter adapter = (MovieIntroduceAdapter) getMvpView().getAdapter();
+                adapter.setMovieIntroduceResponse(movieIntroduceResponse);
+                ((IMovieIntroduceMvpView) getMvpView()).getRecyclerView().setAdapter(adapter);
+            } else {
+                throw new MvpViewNotCorrect();
+            }
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
+
+        }
+    }
+
+    public static class MvpViewNotCorrect extends RuntimeException {
+        public MvpViewNotCorrect() {
+            super("Please check the MvpView type");
         }
     }
 }

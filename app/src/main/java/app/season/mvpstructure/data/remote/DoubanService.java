@@ -36,6 +36,7 @@ public interface DouBanService {
     @GET("movie/subject/{id}")
     Observable<MovieIntroduceResponse> getMovieIntroduce(@Path("id") String id);
 
+
     /**
      * Create a new GitHubService
      */

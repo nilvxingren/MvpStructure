@@ -4,10 +4,8 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.jude.easyrecyclerview.EasyRecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </com.jude.easyrecyclerview.EasyRecyclerView>
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/image"
+        android:layout_width="100dp"
+        android:layout_height="120dp"/>
 </LinearLayout>

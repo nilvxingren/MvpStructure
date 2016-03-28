@@ -2,18 +2,18 @@ package app.season.mvpstructure.ui.moviedetailfragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import javax.inject.Inject;
 
 import app.season.mvpstructure.R;
 import app.season.mvpstructure.ui.base.BaseFragment;
-import app.season.mvpstructure.ui.mainfragment.IMovieMvpView;
 import app.season.mvpstructure.ui.mainfragment.MoviePresenter;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,12 +24,12 @@ import butterknife.ButterKnife;
  * Time: 14:51
  * FIXME
  */
-public class IntroduceFragment extends BaseFragment implements IMovieMvpView {
+public class IntroduceFragment extends BaseFragment implements IMovieIntroduceMvpView {
     @Bind(R.id.recycler)
     EasyRecyclerView mRecycler;
 
     @Inject
-    MovieAdapter mMovieAdapter;
+    MovieIntroduceAdapter mMovieIntroduceAdapter;
     @Inject
     MoviePresenter mMoviePresenter;
 
@@ -41,8 +41,13 @@ public class IntroduceFragment extends BaseFragment implements IMovieMvpView {
 
 
     @Override
-    public RecyclerArrayAdapter getAdapter() {
-        return null;
+    public RecyclerView.Adapter getAdapter() {
+        return mMovieIntroduceAdapter;
+    }
+
+    @Override
+    public EasyRecyclerView getRecyclerView() {
+        return mRecycler;
     }
 
     @Override
@@ -63,7 +68,7 @@ public class IntroduceFragment extends BaseFragment implements IMovieMvpView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override

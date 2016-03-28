@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class InTheatersFragment extends BaseFragment implements IMovieMvpView {
 
 
     @Override
-    public RecyclerArrayAdapter getAdapter() {
+    public RecyclerView.Adapter getAdapter() {
         return mMovieAdapter;
     }
 
@@ -67,6 +68,7 @@ public class InTheatersFragment extends BaseFragment implements IMovieMvpView {
             public void onItemClick(int position) {
                 MovieListResponse.SubjectsEntity entity = mMovieAdapter.getItem(position);
                 Intent intent = new Intent();
+                intent.putExtra(MovieDetailActivity.INTENT_MOVIE_ID, entity.getId());
                 intent.setClass(getActivity(), MovieDetailActivity.class);
                 startActivity(intent);
             }

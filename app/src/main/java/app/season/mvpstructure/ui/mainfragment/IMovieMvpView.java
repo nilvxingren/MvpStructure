@@ -1,5 +1,7 @@
 package app.season.mvpstructure.ui.mainfragment;
 
+import android.support.v7.widget.RecyclerView;
+
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 
 import app.season.mvpstructure.ui.base.IMvpView;
@@ -11,5 +13,5 @@ import app.season.mvpstructure.ui.base.IMvpView;
  * FIXME
  */
 public interface IMovieMvpView extends IMvpView {
-    RecyclerArrayAdapter getAdapter();
+    RecyclerView.Adapter getAdapter();
 }
