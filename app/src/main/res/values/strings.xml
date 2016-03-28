@@ -14,4 +14,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_movie_detail">电影详情</string>
+    <string name="noData">没有数据</string>
+    <string name="loading">加载中...</string>
 </resources>

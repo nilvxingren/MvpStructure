@@ -1,9 +1,7 @@
 package app.season.mvpstructure.ui.login;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -62,15 +60,7 @@ public class LoginActivity extends BaseActivity implements ILoginMvpView {
     public void loginSuccess() {
         Intent intent = new Intent();
         intent.setClass(LoginActivity.this, MainActivity.class);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//            startActivity(intent,
-//                    ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
-            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-                    mLogin,
-                    "share").toBundle());
-        } else {
-            startActivity(intent);
-        }
+        startActivity(intent);
     }
 
     @Override

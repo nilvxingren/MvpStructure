@@ -3,6 +3,7 @@ package app.season.mvpstructure.ui.mainfragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,7 +28,11 @@ import butterknife.ButterKnife;
  * Time: 13:12
  * FIXME
  */
-public class InTheatersFragment extends BaseFragment implements IMovieMvpView {
+public class InTheatersFragment extends BaseFragment implements
+        IMovieMvpView,
+        RecyclerArrayAdapter.OnLoadMoreListener,
+        SwipeRefreshLayout.OnRefreshListener {
+
     @Bind(R.id.recycler)
     EasyRecyclerView mRecycler;
 
@@ -41,6 +46,15 @@ public class InTheatersFragment extends BaseFragment implements IMovieMvpView {
     @Override
     public RecyclerView.Adapter getAdapter() {
         return mMovieAdapter;
+    }
+
+    @Override
+    public void onLoadMore() {
+    }
+
+    @Override
+    public void onRefresh() {
+        mMoviePresenter.getInTheaters("成都");
     }
 
     @Override
@@ -63,6 +77,18 @@ public class InTheatersFragment extends BaseFragment implements IMovieMvpView {
         super.onViewCreated(view, savedInstanceState);
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecycler.setAdapterWithProgress(mMovieAdapter);
+        mRecycler.setRefreshListener(this);
+
+        mMovieAdapter.setMore(R.layout.recycler_item_more, this);
+        mMovieAdapter.setNoMore(R.layout.recycler_item_nomore);
+        mMovieAdapter.setError(R.layout.recycler_item_error).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                onRefresh();
+            }
+        });
+
         mMovieAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
