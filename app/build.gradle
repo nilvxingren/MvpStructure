@@ -2,16 +2,19 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.jakewharton.hugo'
 
+def config = rootProject.ext.configuration // 配置
+def libs = rootProject.ext.libraries // 库
+
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion config.compileVersion
+    buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
-        applicationId "app.season.mvpstructure"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        applicationId config.package
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+        versionCode config.version_code
+        versionName config.version_name
     }
     buildTypes {
         release {
@@ -19,6 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     sourceSets {
         main {
             java.srcDirs = ['src/main/java', 'src/main/java-gen']
@@ -32,98 +41,80 @@ android {
 }
 
 dependencies {
-    final PLAY_SERVICES_VERSION = '8.4.0'
-    final SUPPORT_LIBRARY_VERSION = '23.2.1'
-    final RETROFIT_VERSION = '2.0.0'
-    final OKHTTP_VERSION = '3.2.0'
-    final DAGGER_VERSION = '2.1'
-    final DEXMAKER_VERSION = '1.4'
-    final HAMCREST_VERSION = '1.3'
-    final ESPRESSO_VERSION = '2.2.1'
-    final MOCKITO_VERSION = '1.10.19'
-    final RUNNER_VERSION = '0.4'
-    final OTTO_VERSION = '1.3.8'
-    final JUNIT_VERSION = '4.12'
-    final RXJAVA_VERSION = '1.1.0'
-    final UI_AUTOMATOR_VERSION = '2.1.2'
-    final BUTTERKNIFE_VERSION = '7.0.1'
-    final TIMBER_VERSION = '4.1.1'
-    final SQLBRITE_VERSION = '0.6.2'
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
 
     //support library
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:percent:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:appcompat-v7:${libs.SUPPORT_VERSION}"
+    compile "com.android.support:design:${libs.SUPPORT_VERSION}"
+    compile "com.android.support:percent:${libs.SUPPORT_VERSION}"
+    compile "com.android.support:recyclerview-v7:${libs.SUPPORT_VERSION}"
+    compile "com.android.support:cardview-v7:${libs.SUPPORT_VERSION}"
+    compile "com.android.support:support-annotations:${libs.SUPPORT_VERSION}"
 
     //retrofit
-    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
-    compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
-    compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    compile "com.squareup.retrofit2:retrofit:${libs.RETROFIT_VERSION}"
+    compile "com.squareup.retrofit2:converter-gson:${libs.RETROFIT_VERSION}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${libs.RETROFIT_VERSION}"
+    compile "com.squareup.okhttp3:okhttp:${libs.OKHTTP_VERSION}"
+    compile "com.squareup.okhttp3:logging-interceptor:${libs.OKHTTP_VERSION}"
 
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile "com.squareup.sqlbrite:sqlbrite:$SQLBRITE_VERSION"
-    compile "com.squareup:otto:$OTTO_VERSION"
+    compile "com.squareup.picasso:picasso:${libs.PICASSO_VERSION}"
+    compile "com.squareup.sqlbrite:sqlbrite:${libs.SQLBRITE_VERSION}"
+    compile "com.squareup:otto:${libs.OTTO_VERSION}"
 
     //RxJava
-    compile "io.reactivex:rxandroid:$RXJAVA_VERSION"
-    compile "io.reactivex:rxjava:$RXJAVA_VERSION"
+    compile "io.reactivex:rxandroid:${libs.RXJAVA_VERSION}"
+    compile "io.reactivex:rxjava:${libs.RXJAVA_VERSION}"
 
     //ButterKnife
-    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    compile "com.jakewharton.timber:timber:$TIMBER_VERSION"
+    compile "com.jakewharton:butterknife:${libs.BUTTERKNIFE_VERSION}"
+    compile "com.jakewharton.timber:timber:${libs.TIMBER_VERSION}"
 
     //dagger2
-    compile "com.google.dagger:dagger:$DAGGER_VERSION"
-    apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    compile "com.google.dagger:dagger:${libs.DAGGER_VERSION}"
+    apt "com.google.dagger:dagger-compiler:${libs.DAGGER_VERSION}"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
 
     //Fresco
-    compile 'com.facebook.fresco:fresco:0.9.0'
+    compile "com.facebook.fresco:fresco:${libs.FRESCO_VERSION}"
 
     //MaterialSearchView
-    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile "com.miguelcatalan:materialsearchview:${libs.MATERIALSEARCHVIEW_VERSION}"
 
     //EasyRecyclerView
-    compile 'com.jude:easyrecyclerview:3.4.4'
+    compile "com.jude:easyrecyclerview:${libs.EASYRECYCLERVIEW_VERSION}"
 
     // Instrumentation test dependencies
-    androidTestCompile "junit:junit:$JUNIT_VERSION"
-    androidTestCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
-    androidTestCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-    androidTestCompile("com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
+    androidTestCompile "junit:junit:${libs.JUNIT_VERSION}"
+    androidTestCompile "org.mockito:mockito-core:${libs.MOCKITO_VERSION}"
+    androidTestCompile "com.android.support:support-annotations:${libs.SUPPORT_VERSION}"
+    androidTestCompile("com.android.support.test.espresso:espresso-contrib:${libs.ESPRESSO_VERSION}") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso:espresso-intents:$ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
-    androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
-    androidTestCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker:$DEXMAKER_VERSION"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:$DEXMAKER_VERSION"
-    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:$DEXMAKER_VERSION"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:${libs.ESPRESSO_VERSION}"
+    androidTestCompile "com.android.support.test.espresso:espresso-intents:${libs.ESPRESSO_VERSION}"
+    androidTestCompile "com.android.support.test:runner:${libs.RUNNER_VERSION}"
+    androidTestCompile "com.android.support.test:rules:${libs.RUNNER_VERSION}"
+    androidTestCompile "org.mockito:mockito-core:${libs.MOCKITO_VERSION}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker:${libs.DEXMAKER_VERSION}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-dx:${libs.DEXMAKER_VERSION}"
+    androidTestCompile "com.crittercism.dexmaker:dexmaker-mockito:${libs.DEXMAKER_VERSION}"
 
-    androidTestApt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    androidTestApt "com.google.dagger:dagger-compiler:${libs.DAGGER_VERSION}"
 
     // Unit tests dependencies
-    testCompile "junit:junit:$JUNIT_VERSION"
-    testCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
-    testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
+    testCompile "junit:junit:${libs.JUNIT_VERSION}"
+    testCompile "org.mockito:mockito-core:${libs.MOCKITO_VERSION}"
+    testCompile "org.hamcrest:hamcrest-core:${libs.HAMCREST_VERSION}"
+    testCompile "org.hamcrest:hamcrest-library:${libs.HAMCREST_VERSION}"
+    testCompile "org.hamcrest:hamcrest-integration:${libs.HAMCREST_VERSION}"
     testCompile 'org.robolectric:robolectric:3.0'
 
     // APT dependencies
-    testApt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    testApt "com.google.dagger:dagger-compiler:${libs.DAGGER_VERSION}"
 }
 // Log out test results to console
 tasks.matching { it instanceof Test }.all {
